@@ -1,0 +1,22 @@
+oauthUrl: 'https://id.qlteacher.com/api/auth/token?grant_type=password'
+client:
+  clientId: '#clientId#'
+  clientSecret: '#clientSecret#'
+  userName: '#userName#'
+  userPassword: '#userPassword#'
+baseInfo:
+  structuresUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-base-info/activity/structures/'
+  loadTeacherUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-base-info/teacher/'
+  queryCatalogInfosPageUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-base-info/catalog-infos'
+lesson:
+  applyLessonUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lesson/apply'
+  submitLessonUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lesson/submit'
+  loadLessonUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lesson/info/'
+  updateLessonUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lesson/update'
+  deleteLessonUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lesson/'
+  queryLessonsPageUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/page'
+  lessonCoverUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/cover/'
+  applyLessonStructureUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/structure/'
+  commitLessonStructuresUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/structures/'
+  lessonCheckUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/check/'
+  lessonConfirmUrl: 'http://api-1s1ksd.qlteacher.com/api/otoel-upload/lessons/confirm/'
