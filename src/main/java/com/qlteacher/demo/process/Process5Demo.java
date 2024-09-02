@@ -15,8 +15,8 @@ import java.util.List;
 
 
 /**
- * 第四步循环上传课例资源 需要解析保存下来的课例信息，上传所有环节节点下类型为data类型节点指定的资源
- * 这个例子中使用循环调用方式在每个节点下上传一个资源，资源选择优先级 视频 -> 文档 -> 图片
+ * 第五步循环上传课例资源 需要解析保存下来的课例信息，上传所有环节节点下类型为data类型节点指定的资源
+ * 这个例子中使用循环调用方式在每个节点下上传一个资源，资源选择优先级 视频 > pdf文档 > doc,docx文档 > zip,rar文件
  *
  * @author 江立国 2024/8/16 17:19
  */
@@ -26,18 +26,18 @@ public class Process5Demo {
         File file = Constant.getFile(String.format("test-%s-%s-result.json", Constant.activityId, Constant.catalogId));
         List<UploadLessonItemVO> itemVOS = loadLessonStructures(file);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        File video = new File(classLoader.getResource("file/upload-video.mp4").getFile());
         File pdf = new File(classLoader.getResource("file/upload-document.pdf").getFile());
         File document = new File(classLoader.getResource("file/upload-document.docx").getFile());
-        File video = new File(classLoader.getResource("file/upload-video.mp4").getFile());
         File other = new File(classLoader.getResource("file/upload-file.zip").getFile());
 
         for (UploadLessonItemVO item : itemVOS) {
             if(item.getLimit().stream().anyMatch(limit -> limit.getFileFormat().contains("mp4"))){
                 UploadLessonStructureResourceDemo.uploadLessonStructureResource(item.getLessonCaseId(), item.getLessonCaseStructureId(), video);
-            }else if(item.getLimit().stream().anyMatch(limit -> limit.getFileFormat().contains("docx"))){
-                UploadLessonStructureResourceDemo.uploadLessonStructureResource(item.getLessonCaseId(), item.getLessonCaseStructureId(), document);
             }else if(item.getLimit().stream().anyMatch(limit -> limit.getFileFormat().contains("pdf"))){
                 UploadLessonStructureResourceDemo.uploadLessonStructureResource(item.getLessonCaseId(), item.getLessonCaseStructureId(), pdf);
+            }else if(item.getLimit().stream().anyMatch(limit -> limit.getFileFormat().contains("docx"))){
+                UploadLessonStructureResourceDemo.uploadLessonStructureResource(item.getLessonCaseId(), item.getLessonCaseStructureId(), document);
             }else{
                 UploadLessonStructureResourceDemo.uploadLessonStructureResource(item.getLessonCaseId(), item.getLessonCaseStructureId(), other);
             }

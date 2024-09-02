@@ -2,6 +2,7 @@ package com.qlteacher.demo.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.qlteacher.demo.Constant;
+import com.qlteacher.demo.pojo.conf.ConfigUtil;
 import com.qlteacher.demo.pojo.dto.CreativeTeamDTO;
 import lombok.SneakyThrows;
 import org.springframework.expression.EvaluationContext;
@@ -11,6 +12,7 @@ import org.springframework.expression.ParserContext;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.util.ObjectUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * 模板处理工具类
@@ -25,16 +28,6 @@ import java.util.regex.Pattern;
  * @author 江立国 2024/7/31 14:00
  */
 public class TestMarkerTemplate {
-
-    public static String masterId = "#主持人编号#";
-
-    public static String lectureId = "#核心成员编号#";
-
-    public static String masterName = "#主持人姓名#";
-
-    public static String lectureName = "#核心成员姓名#";
-
-    public static String schoolId = "#学校编号#";
 
     public static String TITLE = "#课例标题#";
 
@@ -75,11 +68,11 @@ public class TestMarkerTemplate {
         //声明tags信息 实际应用中每一个tags相关属性需要生成个自对应的tags的JSON字符串
         String tags = JSON.toJSON(new String[]{"#tags1#","#tags2#"}).toString();
         Random random = new Random(System.currentTimeMillis());
-
+        List<CreativeTeamDTO> teams = ConfigUtil.getConfig().getLesson().getTeams().stream().filter(team ->!"member".equals(team.getType())).collect(Collectors.toList());
         for (String property : properties) {
             //结构环节属性赋值
             if(property.startsWith("structure_")) {
-                boolean isMaster = random.nextBoolean();
+                int randomIndex = teams.isEmpty()? 0 : random.nextInt(teams.size());
                 if (property.endsWith("_summary")) {
                     content.put(property, "");
                     continue;
@@ -89,11 +82,11 @@ public class TestMarkerTemplate {
                     continue;
                 }
                 if (property.endsWith("_lecturer_id")) {
-                    content.put(property, isMaster?masterId:lectureId);
+                    content.put(property, teams.isEmpty()?"":teams.get(randomIndex).getUserId());
                     continue;
                 }
                 if (property.endsWith("_lecturer_name")) {
-                    content.put(property, isMaster?masterName:lectureName);
+                    content.put(property, "");
                     continue;
                 }
                 if (property.endsWith("_tags")) {
@@ -111,7 +104,7 @@ public class TestMarkerTemplate {
                 continue;
             }
             if(property.equals("lesson_school_id")){
-                content.put(property, schoolId);
+                content.put(property, ConfigUtil.getConfig().getLesson().getSchoolId());
                 continue;
             }
             if(property.equals("lesson_ranking")) {
@@ -123,7 +116,11 @@ public class TestMarkerTemplate {
                 continue;
             }
             if(property.equals("lesson_authors")) {
-                content.put(property, JSON.toJSON(new CreativeTeamDTO[]{new CreativeTeamDTO(masterId, "master"), new CreativeTeamDTO(lectureId, "lecturer")}).toString());
+                if(!ObjectUtils.isEmpty(teams)) {
+                    content.put(property, JSON.toJSON(ConfigUtil.getConfig().getLesson().getTeams()).toString());
+                }else{
+                    content.put(property, "null");
+                }
                 continue;
             }
         }

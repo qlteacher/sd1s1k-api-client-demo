@@ -10,19 +10,13 @@ import java.net.URL;
  */
 public class Constant {
 
-    public static final String activityId = "sd2024";
+    public static final String activityId = "#活动编号#";
 
     //catalogId可以通过查阅文档获取
-    public static final String catalogId = "#catalogId#";
-
-    public static final String userId = "#用户编号#";
-
-    public static final String userName = "#用户姓名#";
-
-    public static final String schoolId = "#学校编号#";
+    public static final String catalogId = "#目录编号#";
 
     //临时跟目录
-    public static final String baseOutPath = "/vars/otoel/";
+    public static final String baseOutPath = "/tmp/1s1k/";
 
     public static File getFile(String name){
         File basedir = new File(baseOutPath);

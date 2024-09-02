@@ -1,12 +1,20 @@
 package com.qlteacher.demo.pojo.conf;
 
+import com.qlteacher.demo.pojo.dto.CreativeTeamDTO;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 江立国 2024/8/14 16:50
  */
 @Data
 public class LessonConf {
+
+    private String schoolId = "";
+
+    private List<CreativeTeamDTO> teams = new ArrayList<>();
 
     private String applyLessonUrl;
 

@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileInputStream;
 
 /**
+ * 第七步 请在预览课例后，确认课例可以正常显示，所有文件和信息没有缺失的情况下，进行此确认步骤。
+ * 确认后，课例将正式入库并发布成为市级优课
+ *
  * @author 江立国 2024/8/16 18:36
  */
 public class Process7Demo {

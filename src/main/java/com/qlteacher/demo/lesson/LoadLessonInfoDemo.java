@@ -25,7 +25,7 @@ public class LoadLessonInfoDemo {
 
     @SneakyThrows
     public static void main(String[] args) {
-        File file = Constant.getFile("test-result.json");
+        File file = Constant.getFile(String.format("test-%s-%s-result.json", Constant.activityId, Constant.catalogId));
         if(file.exists()) {
             FileInputStream in = new FileInputStream(file);
             byte[] bytes = new byte[in.available()];

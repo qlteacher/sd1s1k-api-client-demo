@@ -11,6 +11,9 @@ import java.io.FileInputStream;
 import java.util.List;
 
 /**
+ * 第六步 检查课例上传完成及转换状态
+ * 课程所有必填项必须上传完成且转换完成，才能进入下一步
+ *
  * @author 江立国 2024/8/16 18:32
  */
 public class Process6Demo {
@@ -25,10 +28,10 @@ public class Process6Demo {
         String lessonBody = new String(buf, "utf-8");
         UploadLessonCaseInfoVO infoVO = JSON.parseObject(lessonBody, UploadLessonCaseInfoVO.class);
         List<String> errors = LessonCheckDemo.lessonCheck(infoVO.getId());
-        if(errors.isEmpty()){
+        if (errors.isEmpty()) {
             System.out.println("课例检查完成，课例已经补充完善！");
         } else {
-            System.out.println("课例检查完成,还有内容需要完善："+errors.toString());
+            System.out.println("课例检查完成,还有内容需要完善：" + errors.toString());
         }
     }
 }

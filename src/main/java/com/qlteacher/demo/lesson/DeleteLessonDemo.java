@@ -23,17 +23,9 @@ public class DeleteLessonDemo {
 
     @SneakyThrows
     public static void main(String[] args) {
-        File file = Constant.getFile("test-result.json");
-        if(file.exists()) {
-            FileInputStream in = new FileInputStream(file);
-            byte[] bytes = new byte[in.available()];
-            in.read(bytes);
-            in.close();
-            String body = new String(bytes, "utf-8");
-            UploadLessonCaseInfoVO infoVO = JSON.parseObject(body, UploadLessonCaseInfoVO.class);
-            if(deleteLessonDemo(infoVO.getId())) {
-                System.out.println("删除成功");
-            }
+        String id = "dcad6fca4d5d4b2b8c4e17ed0a29fce7";
+        if(deleteLessonDemo(id)) {
+            System.out.println("删除成功");
         }
     }
 
