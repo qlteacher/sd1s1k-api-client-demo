@@ -23,7 +23,7 @@ public class DeleteLessonDemo {
 
     @SneakyThrows
     public static void main(String[] args) {
-        String id = "dcad6fca4d5d4b2b8c4e17ed0a29fce7";
+        String id = "dcad6fca4d5d4b2b8c4e17ed0a29f321111";
         if(deleteLessonDemo(id)) {
             System.out.println("删除成功");
         }
@@ -32,20 +32,21 @@ public class DeleteLessonDemo {
     @SneakyThrows
     public static Boolean deleteLessonDemo(String id){
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+        //先获取token
+        String accessToken = AccessTokenDemo.getAccessToken();
+
+        OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(
+                ConfigUtil.getConfig().getLesson().getDeleteLessonUrl().concat(id))
+                .setAccessToken(accessToken)
+                .buildHeaderMessage();
+
+        OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.DELETE, OAuthResourceResponse.class);
+        String body = resourceResponse.getBody();
+        System.out.println(body);
         try {
-            //先获取token
-            String accessToken = AccessTokenDemo.getAccessToken();
-
-            OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(
-                    ConfigUtil.getConfig().getLesson().getDeleteLessonUrl().concat(id))
-                    .setAccessToken(accessToken)
-                    .buildHeaderMessage();
-
-            OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.DELETE, OAuthResourceResponse.class);
-            String body = resourceResponse.getBody();
-            return Boolean.valueOf(body);
+            return "true".equals(body);
         } catch (Exception e) {
-            throw e;
+            return false;
         }
     }
 }
