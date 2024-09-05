@@ -21,4 +21,4 @@
 ![](document/upload_lesson_flow.png)
 
 ## 一师一课演示文档
-[document/一师一优课2024接口文档.md]([document/一师一优课2024接口文档](https://github.com/qlteacher/sd1s1k-api-client-demo/blob/main/document/%E4%B8%80%E5%B8%88%E4%B8%80%E4%BC%98%E8%AF%BE2024%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md))
+[document/一师一优课2024接口文档.md](https://github.com/qlteacher/sd1s1k-api-client-demo/blob/main/document/%E4%B8%80%E5%B8%88%E4%B8%80%E4%BC%98%E8%AF%BE2024%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md)
