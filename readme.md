@@ -21,4 +21,4 @@
 ![](document/upload_lesson_flow.png)
 
 ## 一师一课演示文档
-[document/甲辰一师一课.md](document/一师一优课2024接口文档)
+[document/一师一优课2024接口文档.md](document/一师一优课2024接口文档)
